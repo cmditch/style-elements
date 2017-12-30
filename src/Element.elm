@@ -691,7 +691,7 @@ table style attrs rows =
                     )
                     rows
     in
-    grid style attrs { columns = [], rows = [], cells = children }
+        grid style attrs { columns = [], rows = [], cells = children }
 
 
 {-| -}
@@ -759,14 +759,14 @@ grid style attrs config =
                 _ ->
                     []
     in
-    Layout
-        { node = "div"
-        , style = Just style
-        , layout = Style.Grid (Style.GridTemplate { rows = config.rows, columns = config.columns }) gridAttributes
-        , attrs = notSpacingAttrs
-        , children = prepare config.cells
-        , absolutelyPositioned = Nothing
-        }
+        Layout
+            { node = "div"
+            , style = Just style
+            , layout = Style.Grid (Style.GridTemplate { rows = config.rows, columns = config.columns }) gridAttributes
+            , attrs = notSpacingAttrs
+            , children = prepare config.cells
+            , absolutelyPositioned = Nothing
+            }
 
 
 {-| -}
@@ -828,14 +828,14 @@ namedGrid style attrs config =
                 _ ->
                     []
     in
-    Layout
-        { node = "div"
-        , style = Just style
-        , layout = Style.Grid (Style.NamedGridTemplate { rows = config.rows, columns = config.columns }) gridAttributes
-        , attrs = notSpacingAttrs
-        , children = prepare config.cells
-        , absolutelyPositioned = Nothing
-        }
+        Layout
+            { node = "div"
+            , style = Just style
+            , layout = Style.Grid (Style.NamedGridTemplate { rows = config.rows, columns = config.columns }) gridAttributes
+            , attrs = notSpacingAttrs
+            , children = prepare config.cells
+            , absolutelyPositioned = Nothing
+            }
 
 
 {-| -}
@@ -868,7 +868,7 @@ cell box =
             , height = box.height
             }
     in
-    OnGrid <| Modify.addAttr (GridCoords <| Style.GridPosition coords) box.content
+        OnGrid <| Modify.addAttr (GridCoords <| Style.GridPosition coords) box.content
 
 
 {-| Specify a named postion on a `namedGrid`.
@@ -913,6 +913,8 @@ link src el =
         , attrs =
             [ Attr (Html.Attributes.href src)
             , Attr (Html.Attributes.rel "noopener noreferrer")
+            , Attr.height Attr.fill
+            , Attr.width Attr.fill
             ]
         , child = el
         , absolutelyPositioned = Nothing
@@ -1040,7 +1042,7 @@ within nearbys parent =
                 |> Modify.addAttr (PositionFrame (Nearby Within))
                 |> Modify.addChild p
     in
-    List.foldr position parent nearbys
+        List.foldr position parent nearbys
 
 
 {-| -}
@@ -1054,7 +1056,7 @@ above nearbys parent =
                 |> Modify.removeAttrs [ VAlign Top, VAlign Bottom ]
                 |> Modify.addChild p
     in
-    List.foldr position parent nearbys
+        List.foldr position parent nearbys
 
 
 {-| -}
@@ -1068,7 +1070,7 @@ below nearbys parent =
                 |> Modify.removeAttrs [ VAlign Top, VAlign Bottom ]
                 |> Modify.addChild p
     in
-    List.foldr position parent nearbys
+        List.foldr position parent nearbys
 
 
 {-| -}
@@ -1082,7 +1084,7 @@ onRight nearbys parent =
                 |> Modify.removeAttrs [ HAlign Right, HAlign Left ]
                 |> Modify.addChild p
     in
-    List.foldr position parent nearbys
+        List.foldr position parent nearbys
 
 
 {-| -}
@@ -1096,7 +1098,7 @@ onLeft nearbys parent =
                 |> Modify.removeAttrs [ HAlign Right, HAlign Left ]
                 |> Modify.addChild p
     in
-    List.foldr position parent nearbys
+        List.foldr position parent nearbys
 
 
 {-| Position an element relative to the window.
@@ -1202,7 +1204,7 @@ responsive a ( aMin, aMax ) ( bMin, bMax ) =
             deltaA =
                 (a - aMin) / (aMax - aMin)
         in
-        (deltaA * (bMax - bMin)) + bMin
+            (deltaA * (bMax - bMin)) + bMin
 
 
 {-| Change the msg that an Element is sending.
@@ -1244,7 +1246,7 @@ search style attrs child =
 
 The required `name` is used by accessibility software to describe to non-sighted users what this navigation element pertains to.
 
-Don't leave `name` blank, even if you just put _"Main Navigation"_ in it.
+Don't leave `name` blank, even if you just put *"Main Navigation"* in it.
 
      navigation NavMenuStyle
         []
@@ -1268,24 +1270,24 @@ navigation style attrs { options, name } =
                 , absolutelyPositioned = Nothing
                 }
     in
-    Internal.Element
-        { node = "nav"
-        , style = Nothing
-        , attrs = [ Attr.attribute "role" "navigation", Attr.attribute "aria-label" name ]
-        , child =
-            Internal.Layout
-                { node = "ul"
-                , style = Just style
-                , layout = Style.FlexLayout Style.GoRight []
-                , attrs = attrs
-                , children =
-                    options
-                        |> List.map wrap
-                        |> Internal.Normal
-                , absolutelyPositioned = Nothing
-                }
-        , absolutelyPositioned = Nothing
-        }
+        Internal.Element
+            { node = "nav"
+            , style = Nothing
+            , attrs = [ Attr.attribute "role" "navigation", Attr.attribute "aria-label" name ]
+            , child =
+                Internal.Layout
+                    { node = "ul"
+                    , style = Just style
+                    , layout = Style.FlexLayout Style.GoRight []
+                    , attrs = attrs
+                    , children =
+                        options
+                            |> List.map wrap
+                            |> Internal.Normal
+                    , absolutelyPositioned = Nothing
+                    }
+            , absolutelyPositioned = Nothing
+            }
 
 
 {-| -}
@@ -1301,24 +1303,24 @@ navigationColumn style attrs { options, name } =
                 , absolutelyPositioned = Nothing
                 }
     in
-    Internal.Element
-        { node = "nav"
-        , style = Nothing
-        , attrs = [ Attr.attribute "role" "navigation", Attr.attribute "aria-label" name ]
-        , child =
-            Internal.Layout
-                { node = "ul"
-                , style = Just style
-                , layout = Style.FlexLayout Style.Down []
-                , attrs = attrs
-                , children =
-                    options
-                        |> List.map wrap
-                        |> Internal.Normal
-                , absolutelyPositioned = Nothing
-                }
-        , absolutelyPositioned = Nothing
-        }
+        Internal.Element
+            { node = "nav"
+            , style = Nothing
+            , attrs = [ Attr.attribute "role" "navigation", Attr.attribute "aria-label" name ]
+            , child =
+                Internal.Layout
+                    { node = "ul"
+                    , style = Just style
+                    , layout = Style.FlexLayout Style.Down []
+                    , attrs = attrs
+                    , children =
+                        options
+                            |> List.map wrap
+                            |> Internal.Normal
+                    , absolutelyPositioned = Nothing
+                    }
+            , absolutelyPositioned = Nothing
+            }
 
 
 {-| This is the main page header area.
